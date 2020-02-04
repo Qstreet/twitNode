@@ -5,16 +5,22 @@ var config = require('./config') /*01* call config.js for attributes of T */
 
 var T = new Twit(config); /* call 01 with attributees  */
 
-let params = {
-  q: 'golden retrievers',
-  count: 5
+// let params = {
+//   q: '@tylercowen',
+//   count: 5
+// }
+
+// T.get('search/tweets', params, gotData);
+
+var tweet = {
+  status: "#dogSaysWoof from node"
 }
 
-T.get('search/tweets', params, gotData);
+T.post('statuses/update', tweet, tweeted )
 
-function gotData(error, data, response) {
+function tweeted(error, data, response) {
   if (error) {
-    console.log("Error");
+    console.log("Error", error);
     return;
   }
   let tweets = data.statuses;
